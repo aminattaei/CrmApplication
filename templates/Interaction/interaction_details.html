@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %} {{ interaction }} {% endblock title %}
+
+{% block content %}
+<h2>interaction Details</h2>
+
+<style>
+  input{
+    width: 100%;  
+    border-style: none;
+  }
+</style>
+
+
+  <table class="table table-bordered w-50">
+  <tbody>
+    <tr>
+      <th scope="row">Contact_date</th>
+      <td>{{ interaction.contact_date }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Summary</th>
+      <td>{{ interaction.summary }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Customer</th>
+      <td>{{ interaction.customer|default:"-" }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Lead</th>
+      <td>{{ interaction.lead|default:"-" }}</td>
+    </tr>
+  </tbody>
+</table>
+<br><br>  
+
+<a href="{% url 'interaction_delete' interaction.pk %}" class="btn btn-danger mt-3">Delete this interaction</a>
+
+
+{% endblock content %}

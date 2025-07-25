@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Create Interaction{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Create New Interaction</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_contact_date" class="form-label">Contact Date</label>
+            <input type="datetime-local" class="form-control" name="contact_date" id="id_contact_date" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="id_summary" class="form-label">Summary</label>
+            <textarea class="form-control" name="summary" id="id_summary" rows="4" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="id_customer" class="form-label">Customer</label>
+            <select name="customer" id="id_customer" class="form-select">
+                <option value="">---------</option>
+                {% for customer in form.fields.customer.queryset %}
+                    <option value="{{ customer.pk }}">{{ customer.full_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="id_lead" class="form-label">Lead</label>
+            <select name="lead" id="id_lead" class="form-select">
+                <option value="">---------</option>
+                {% for lead in form.fields.lead.queryset %}
+                    <option value="{{ lead.pk }}">{{ lead.full_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+{% endblock %}
